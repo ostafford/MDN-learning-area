@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 
     <title>Number guessing game</title>
 
@@ -16,7 +16,7 @@
         min-width: 480px;
         margin: 0 auto;
       }
-      
+
       .form input[type="number"] {
         width: 200px;
       }
@@ -31,12 +31,22 @@
   <body>
     <h1>Number guessing game</h1>
 
-    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
+    <p>
+      We have selected a random number between 1 and 100. See if you can guess
+      it in 10 turns or fewer. We'll tell you if your guess was too high or too
+      low.
+    </p>
 
     <div class="form">
       <label for="guessField">Enter a guess: </label>
-      <input type="number" min="1" max="100" required id="guessField" class="guessField">
-      <input type="submit" value="Submit guess" class="guessSubmit">
+      <input
+        type="number"
+        min="1"
+        max="100"
+        required
+        id="guessField"
+        class="guessField" />
+      <input type="submit" value="Submit guess" class="guessSubmit" />
     </div>
 
     <div class="resultParas">
@@ -46,9 +56,118 @@
     </div>
 
     <script>
+      /*  1. Generate a random number: Math.random() gives a floating-point number between 0 and 1.
+          2. Scale the number: Multiply by the desired range (e.g., 100) to adjust the range of numbers.
+          3. Round down: Use Math.floor() to get a whole number. */
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
 
-      // Your JavaScript goes here
+      /* Selects the FIRST element within the DOM that matches a specified CSS selector. */
+      const guesses = document.querySelector(".guesses");
+      const lastResult = document.querySelector(".lastResult");
+      const lowOrHi = document.querySelector(".lowOrHi");
 
+      const guessSubmit = document.querySelector(".guessSubmit");
+      const guessField = document.querySelector(".guessField");
+
+      let guessCount = 1;
+      let resetButton;
+      guessField.focus();
+
+      // A simple function that has a functionName and `alert` with a `placeholder` in between the parenthesis
+      function functionName() {
+        alert("I am a placeholder");
+      }
+
+      //  1. `userGuess = what ever is inputted into the guessfield field and converted into a `number` value`
+      //  2. `guesses.textContent` = creating text called "Previous guesses:"
+      //  3. the last `guesses.textContent` is appending (adding) the "Previous guesses:" followed by the `userguess`
+      function checkGuess() {
+        const userGuess = Number(guessField.value);
+        if (guessCount === 1) {
+          guesses.textContent = "Previous guesses:";
+        }
+        guesses.textContent = `${guesses.textContent} ${userGuess}`;
+
+        //  1. Starts the guessing section
+        //  2. if the number is correct execute the first section
+        //  3. or if they've used 10 attempts then game over
+        //  4. or else tell them its wrong but also let them know if its higher or lower.
+        if (userGuess === randomNumber) {
+          lastResult.textContent = "Congratulations! You got it right!";
+          lastResult.style.backgroundColor = "green";
+          lowOrHi.textContent = "";
+          setGameOver();
+        } else if (guessCount === 10) {
+          lastResult.textContent = "!!!GAME OVER!!!";
+          lowOrHi.textContent = "";
+          setGameOver();
+        } else {
+          lastResult.textContent = "Wrong!";
+          lastResult.style.backgroundColor = "red";
+          if (userGuess < randomNumber) {
+            lowOrHi.textContent = "Last guess was too low!";
+          } else if (userGuess > randomNumber) {
+            lowOrHi.textContent = "Last guess was too high!";
+          }
+        }
+
+        //  1. `guessCount++` adds 1 value to each count attempted.
+        //  2. `guessField.value = ""` initially creates a blank field in the input box.
+        //  3. `guessField.focus()` puts the cursor back into the input field for quick repeat access for the user.
+        guessCount++;
+        guessField.value = "";
+        guessField.focus();
+      }
+      //  1. This will add an `.addEventListener` to the button which then runs the `checkGuess` function above.
+      //  2. The console.log syntax will allow you to see if the button is working or not in the console area.
+      guessSubmit.addEventListener("click", checkGuess);
+      // console.log("checkGuess function called");
+
+      //  1. creating the setGameOver function from the previous function
+      //  2. disabling elements that can't repeat or trigger the function
+      //  3. creating a `resetButton` that allows the user to play again
+      //  4. placing the button (append) in the body or location of choice
+      //  5. adding an evenlistener on what happens when they reset the game
+      function setGameOver() {
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+        resetButton = document.createElement("button");
+        resetButton.textContent = "Start new game";
+        document.body.append(resetButton);
+        resetButton.addEventListener("click", resetGame);
+      }
+
+      //  1. Name of the resetGame function. This will occur after pressing the reset button
+      //  2. Resets the count back to 1
+      function resetGame() {
+        guessCount = 1;
+
+        //  1. This variable selects all of the <p> elements nested in the `.resultParas` class.
+        //  2. Then the for loops says: for every `resetPara` (*new variable*) of resetParas (being the <p> elements)
+        //      i want you to clear them with the value of "" (empty string)
+        const resetParas = document.querySelectorAll(".resultParas p");
+        for (const resetPara of resetParas) {
+          resetPara.textContent = "";
+        }
+        //  1. This first selects the `resetButton` that was created in the previous function
+        //  2. then with .parentNode this will select the `resetButtons` parent (for this example the <body>)
+        //  3. then the .removeChild will remove the button element (because the button is the "child" of the <body>)
+        //  4. the value in the `()` being `resetButton` is what will get removed.
+        resetButton.parentNode.removeChild(resetButton);
+
+        //  1. This effectively reverses the previous values as they were false of have content in them.
+        //  2. so essentially creating a blank canvas
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+        guessField.value = "";
+        guessField.focus();
+
+        //  1. being that the background color changes pending the amount of attempts this will change it back to default being white.
+        lastResult.style.backgroundColor = "white";
+
+        //  1. This pretty much allows the randomNumber generator start again.
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+      }
     </script>
   </body>
 </html>

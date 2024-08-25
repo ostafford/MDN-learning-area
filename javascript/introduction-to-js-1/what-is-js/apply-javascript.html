@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>Apply JavaScript example</title>
+    <script type="module" src="./script.js"></script>
   </head>
   <body>
     <button>Click me</button>
+    <button>Click me</button>
+    <button>Click me</button>
+    <button>Click me</button>
   </body>
+  <script>
+    function createParagraph() {
+      const para = document.createElement("p");
+      para.textContent = "You Clicked the button";
+      document.body.appendChild(para);
+    }
+
+    let buttons = document.querySelectorAll("button");
+
+    for (const button of buttons) {
+      button.addEventListener("click", createParagraph);
+    }
+    /*  1. create the function (What is the final outcome of what you want to do)
+        2. What (element)thing (button) will start the function
+        3. when this element or button is actioned what do you want it to do? (Link to step 1 aka the `function`) */
+  </script>
 </html>
