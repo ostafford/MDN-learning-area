@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Math: Task 1</title>
     <style>
       p {
@@ -17,36 +17,32 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
-    let finalResult;
+    let num1 = 4;
+    let num2 = 9;
+    let num3 = 50;
+    let num4 = 44;
+    let step2 = num1 + num2;
+    let step3 = num4 - num3;
+    let finalResult = step2 * step3;
+    let evenOddResult = finalResult % 3;
 
-    let evenOddResult;
+    const section = document.querySelector("section");
 
-    // Add your code here
-
-
-
-    // Don't edit the code below here!
-
-    const section = document.querySelector('section');
-
-    const para1 = document.createElement('p');
-    const finalResultCheck = finalResult === 48 ? `Yes, well done!` : `No, it is ${ finalResult }`;
-    para1.textContent = `Is the finalResult 48? ${ finalResultCheck }`;
-    const para2 = document.createElement('p');
-    const evenOddResultCheck = evenOddResult === 0 ? 'The final result is even!' : 'The final result is odd. Hrm.';
+    const para1 = document.createElement("p");
+    const finalResultCheck =
+      finalResult === 48 ? `Yes, well done!` : `No, it is ${finalResult}`;
+    para1.textContent = `Is the finalResult 48? ${finalResultCheck}`;
+    const para2 = document.createElement("p");
+    const evenOddResultCheck =
+      evenOddResult === 0
+        ? "The final result is even!"
+        : "The final result is odd. Hrm.";
     para2.textContent = evenOddResultCheck;
 
     section.appendChild(para1);
     section.appendChild(para2);
   </script>
-
 </html>
