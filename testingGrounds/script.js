@@ -153,7 +153,7 @@ switch (colourChoice) {
   default:
 } */
 
-//1 - Circumference
+/* //1 - Circumference
 function circumference(radius) {
   return 2 * Math.PI * radius;
 }
@@ -167,6 +167,123 @@ console.log(squareRoot(5));
 
 //3. - Largest Number
 function largestNumber(n, u) {
-  return Math.max(n && u);
+  return Math.max(n, u);
 }
 console.log(largestNumber(5, 98));
+
+//4. - Positive or Negative
+function isPositive(numChoice) {
+  if (numChoice > 0) {
+    return true;
+  } else return false;
+  {
+  }
+}
+
+console.log(isPositive(4));
+console.log(isPositive(-4));
+console.log(isPositive(-24));
+console.log(isPositive(45));
+
+//5. - Maths
+function multiplyAndAdd(a, b, c) {
+  return a * b + c;
+}
+console.log(multiplyAndAdd(2, 3, 4));
+
+//6. Bonus
+function isEvenorOdd(num10) {
+  if (num10 % 2 === 0) {
+    return "even";
+  } else {
+    return "odd";
+  }
+}
+console.log(isEvenorOdd(2));
+console.log(isEvenorOdd(4));
+console.log(isEvenorOdd(1));
+console.log(isEvenorOdd(7)); */
+
+/* function showMessage(from, text) {
+  from = "*" + from + "*";
+  alert(from + ": " + text);
+}
+
+let from = "Ann";
+showMessage(from, "Hello");
+alert(from); */
+
+/* let value = 10;
+
+function modifyValue() {
+  let value = 20;
+  return value;
+}
+
+console.log(modifyValue()); // Output?
+console.log(value); // Output?
+ */
+/* function outerFunction() {
+  let outerVar = "Outer";
+  function innerFunction() {
+    let innerVar = "Inner";
+    return outerVar + " " + innerVar;
+  }
+  return innerFunction();
+}
+
+console.log(outerFunction());
+ */
+/* function calculateSum(a, b) {
+  let sum = a + b;
+  function displaySum() {
+    console.log(sum);
+  }
+  return displaySum();
+}
+
+calculateSum(5, 10);
+ */
+
+/* let counter = 0;
+
+function incrementCounter() {
+  counter += 1;
+}
+
+incrementCounter();
+incrementCounter();
+
+console.log(counter); */
+
+/* function makeCounter() {
+  let count = 0;
+  return function () {
+    count += 1;
+    return count;
+  };
+}
+
+let counter = makeCounter();
+console.log(counter());
+console.log(counter()); */
+
+/* function outer() {
+  let x = "Outer";
+  function inner() {
+    let x = "Inner";
+    console.log(x);
+  }
+  inner();
+}
+
+outer(); */
+
+function add(a, b) {
+  function multiply(x, y) {
+    return x * y;
+  }
+  return multiply(a, b) + 10;
+}
+
+console.log(add(2, 3));
